@@ -12,6 +12,7 @@ import * as Animatable from 'react-native-animatable';
 
 const styles = StyleSheet.create({
   containerDefault: {},
+  wrapperDefault: {},
   cellDefault: {
     borderColor: 'gray',
     borderWidth: 1,
@@ -124,6 +125,7 @@ class SmoothPinCodeInput extends Component {
       mask,
       autoFocus,
       containerStyle,
+      wrapperStyle,
       cellStyle,
       cellStyleFocused,
       cellStyleFilled,
@@ -148,11 +150,13 @@ class SmoothPinCodeInput extends Component {
         },
           containerStyle,
         ]}>
-        <View style={{
-          position: 'absolute', margin: 0, height: '100%',
-          flexDirection: I18nManager.isRTL ? 'row-reverse': 'row',
-          alignItems: 'center',
-        }}>
+        <View style={[{
+            position: 'absolute', margin: 0, height: '100%',
+            flexDirection: I18nManager.isRTL ? 'row-reverse': 'row',
+            alignItems: 'center',
+          },
+            wrapperStyle,
+        ]}>
           {
             Array.apply(null, Array(codeLength)).map((_, idx) => {
               const cellFocused = focused && idx === value.length;
@@ -253,6 +257,7 @@ class SmoothPinCodeInput extends Component {
     autoFocus: false,
     restrictToNumbers: false,
     containerStyle: styles.containerDefault,
+    wrapperStyle: styles.wrapperDefault,
     cellStyle: styles.cellDefault,
     cellStyleFocused: styles.cellFocusedDefault,
     textStyle: styles.textStyleDefault,
@@ -287,6 +292,7 @@ SmoothPinCodeInput.propTypes = {
   restrictToNumbers: PropTypes.bool,
 
   containerStyle: ViewPropTypes.style,
+  wrapperStyle: ViewPropTypes.style,
 
   cellStyle: ViewPropTypes.style,
   cellStyleFocused: ViewPropTypes.style,
